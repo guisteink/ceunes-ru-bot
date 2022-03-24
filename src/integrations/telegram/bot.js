@@ -1,5 +1,9 @@
 const _ = require('lodash');
 const moment = require('moment');
+const cronjob = require('node-cron');
+
+const Telegram = require('@yuva1422/telegram.js');
+const client = new Telegram.client();
 
 class Bot
 {
@@ -10,7 +14,7 @@ class Bot
 
     sendMessage()
     {
-        
+        console.log('running a task every minute');
     }
 
     deleteAllDayMessages()
