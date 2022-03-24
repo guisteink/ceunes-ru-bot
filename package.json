@@ -1,0 +1,8 @@
+{
+  "name": "ceunes-ru-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/guisteink/ceunes-ru-bot.git",
+  "author": "Guilherme Stein <guilherme.steink@gmail.com>",
+  "license": "MIT"
+}
