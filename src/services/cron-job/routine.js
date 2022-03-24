@@ -1,20 +1,12 @@
 const _ = require('lodash');
 const moment = require('moment');
+const botgram = require('../../integrations/telegram/bot');
 
 class Routine
 {
     constructor()
     {
-    }
-
-    sendMessageToTelegram()
-    {
-
-    }
-
-    deleteAllDayMessages()
-    {
-
+        this.botgram = botgram;
     }
 
     isPastDate(auxDate)

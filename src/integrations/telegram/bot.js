@@ -8,6 +8,15 @@ class Bot
         this.token = process.env.TOKEN;
     }
 
+    sendDailyMenuToTelegram()
+    {
+
+    }
+
+    deleteAllDayMessages()
+    {
+
+    }
 }
 
 module.exports = new Bot();
