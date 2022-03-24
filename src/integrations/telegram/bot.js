@@ -5,12 +5,12 @@ class Bot
 {
     constructor()
     {
-        this.token = process.env.TOKEN;
+        this.token = process.env.TELEGRAM_TOKEN;
     }
 
-    sendDailyMenuToTelegram()
+    sendMessage()
     {
-
+        
     }
 
     deleteAllDayMessages()

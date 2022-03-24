@@ -1,12 +1,14 @@
 const _ = require('lodash');
 const moment = require('moment');
 const botgram = require('../../integrations/telegram/bot');
+const scrapper = require('../../integrations/web-scrapper/scrapper')
 
 class Routine
 {
     constructor()
     {
         this.botgram = botgram;
+        this.scrapper = scrapper;
     }
 
     isPastDate(auxDate)
