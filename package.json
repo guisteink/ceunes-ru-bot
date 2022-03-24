@@ -4,5 +4,14 @@
   "main": "index.js",
   "repository": "https://github.com/guisteink/ceunes-ru-bot.git",
   "author": "Guilherme Stein <guilherme.steink@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.3",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "node-cron": "^3.0.0"
+  }
 }
