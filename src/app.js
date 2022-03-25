@@ -1,8 +1,6 @@
 const express = require("express");
-// const noteRoutes = require("./routes/notes.routes");
 const app = express();
 
-// app.use("/note", noteRoutes);
 
 app.use((error, req, res, next) =>
 {
@@ -11,7 +9,7 @@ app.use((error, req, res, next) =>
 
 app.get("/", (req, res) =>
 {
-    res.json("Bot on!");
+    res.json("Hello world!");
 });
 
 module.exports = app;

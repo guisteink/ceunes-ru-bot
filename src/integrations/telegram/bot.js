@@ -1,20 +1,30 @@
-const _ = require('lodash');
-const moment = require('moment');
 const cronjob = require('node-cron');
+const fetch = typeof window !== 'undefined' ? window.fetch : require('node-fetch');
+// const fetch = require('whatwg-fetch');
 
-const Telegram = require('@yuva1422/telegram.js');
-const client = new Telegram.client();
+// const telegramApi = require('../../services/telegram.api')
 
 class Bot
 {
     constructor()
     {
         this.token = process.env.TELEGRAM_TOKEN;
+        this.chat_group_id = process.env.TELEGRAM_GROUP;
+        this.baseUrl = `https://api.telegram.org/bot${this.token}/sendMessage`;
     }
 
-    sendMessage()
+    async sendMessage()
     {
-        console.log('running a task every minute');
+        await fetch(this.baseUrl, {
+            method: "POST",
+            body: JSON.stringify({
+                chat_id: this.chat_group_id,
+                text: "running a task every minute",
+            }),
+            headers: { 'Content-Type': 'application/json' }
+        })
+            .then(res => console.log(res))
+            .catch(err => console.error(err))
     }
 
     deleteAllDayMessages()
