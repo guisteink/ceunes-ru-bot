@@ -9,17 +9,14 @@ class Routine
     {
         this.botgram = botgram;
         this.scrapper = scrapper;
-        this.cycle = "* * * * *";//minute
+        this.cycle = "* * * * * *";//minute
         this.cronjob = cronjob
     }
 
     async execute()
     {
-        cronjob.schedule(this.cycle, async () =>
-        {
-            await this.botgram.sendMessage()
-        });
-
+        // cronjob.schedule(this.cycle, async () => await this.botgram.sendMessage());
+        await this.botgram.sendMessage()
     }
 
     isPastDate(auxDate)
