@@ -1,9 +1,3 @@
-const cronjob = require('node-cron');
-const fetch = typeof window !== 'undefined' ? window.fetch : require('node-fetch');
-// const fetch = require('whatwg-fetch');
-
-// const telegramApi = require('../../services/telegram.api')
-
 class Bot
 {
     constructor()
@@ -15,12 +9,9 @@ class Bot
 
     async sendMessage()
     {
-        await fetch(this.baseUrl, {
+        return await fetch(this.baseUrl, {
             method: "POST",
-            body: JSON.stringify({
-                chat_id: this.chat_group_id,
-                text: "running a task every minute",
-            }),
+            body: JSON.stringify({ chat_id: this.chat_group_id, text: "[HERE GOES THE SCRAPPER CONTENT] -> running a task every minute", }),
             headers: { 'Content-Type': 'application/json' }
         })
             .then(res => console.log(res))
