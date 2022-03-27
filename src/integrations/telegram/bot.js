@@ -31,12 +31,12 @@ class Bot
             let cardapio = await this.scrapper.getCardapio()
 
             const regexAlmoco = /Almoço/ig
-            const regexJantar = /Jantar/ig
-            const regexPratoPrincipal = /Prato Principal/ig
-            const regexSalada = /Salada/ig
-            const regexOpcao = /Opção/ig
-            const regexAcompanhamento = /Acompanhamento/ig
-            const regexGuarnição = /Guarnição/ig
+            const regexJantar = "/Jantar/ig"
+            const regexPratoPrincipal = "/Prato Principal/ig"
+            const regexSalada = "/Salada/ig"
+            const regexOpcao = "/Opção/ig"
+            const regexAcompanhamento = "/Acompanhamento/ig"
+            const regexGuarnição = "/Guarnição/ig"
 
             // console.log('Fail: ', cardapio)
 
