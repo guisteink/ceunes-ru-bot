@@ -1,8 +1,8 @@
-const cronjob = require('node-cron');
 const fetch = typeof window !== 'undefined' ? window.fetch : require('node-fetch');
 const scrapper = require('../../integrations/web-scrapper/scrapper')
 const dotenv = require("dotenv")
 dotenv.config()
+const _ = require('lodash')
 
 class Bot
 {
@@ -28,25 +28,33 @@ class Bot
 
     async sendMessage()
     {
-        console.log('running a task every minute');
         try {
-            await this.scrapper.getCardapioVix()
-            // const result = await fetch(this.baseUrl + "/sendMessage", {
-            //     method: "POST",
-            //     body: JSON.stringify({
-            //         chat_id: this.chat_group_id,
-            //         text: "running a task every minute",
-            //     }),
-            //     headers: { 'Content-Type': 'application/json' }
-            // })
+            let cardapio = await this.scrapper.getCardapio()
 
-            // console.log("result", result)
+            const regexAlmoco = /Almoço/ig
+            const regexJantar = /Jantar/ig
+            const regexPratoPrincipal = /Prato Principal/ig
+            const regexSalada = /Salada/ig
+            const regexOpcao = /Opção/ig
+            const regexAcompanhamento = /Acompanhamento/ig
+            const regexGuarnição = /Guarnição/ig
 
-            // .then(res => console.log(res))
-            // await this.api.sendMessage({
-            //     chat_id: "1739406755",
-            //     text: "text test text test text testtext test",
-            // })
+            cardapio = cardapio.replace(regexJantar, "\n---------------------------------------\nJantar")
+            cardapio = cardapio.replace(regexPratoPrincipal, "\nPrato Principal")
+            cardapio = cardapio.replace(regexSalada, "\nSalada")
+            cardapio = cardapio.replace(regexOpcao, "\nOpção")
+            cardapio = cardapio.replace(regexAcompanhamento, "\nAcompanhamento")
+            cardapio = cardapio.replace(regexGuarnição, "\nGuarnição")
+
+            if (!_.isEmpty(cardapio)) {
+                const result = await fetch(this.baseUrl + "/sendMessage", {
+                    method: "POST",
+                    body: JSON.stringify({ chat_id: this.chat_group_id, text: cardapio, }),
+                    headers: { 'Content-Type': 'application/json' }
+                })
+
+                if(result.status === 200) console.log('Successfull message')
+            }
         } catch (error) {
             console.log(error)
         }

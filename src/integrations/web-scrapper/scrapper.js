@@ -9,22 +9,25 @@ class Scrapper
         this.axios = axios
         this.cheerio = cheerio
         this.pretty = pretty
-        this.vixUrl = "https://ru.ufes.br/cardapio"
+        // todo
+        // !set all urls VIX-CEUNES-ALEGRE
+        this.vixUrl = "https://ru.ufes.br/cardapio/2022-03-25" //? static url
     }
 
-    async getCardapioVix()
+    async getCardapio()
     {
         try {
-            const result = await axios(this.vixUrl, {method: 'GET'})
+            const result = await axios(this.vixUrl, { method: 'GET' })
             const $ = cheerio.load(result.data)
-            const data = $('#view-content').children("div").children("div").children("span")
-            console.log(data.text())
-
+            const data = $('.field-content').text()
+            return data
 
         } catch (error) {
             console.log(error)
         }
     }
+
+    
 
 }
 
