@@ -1,6 +1,7 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 const pretty = require("pretty");
+const moment = require("moment");
 
 class Scrapper
 {
@@ -9,25 +10,29 @@ class Scrapper
         this.axios = axios
         this.cheerio = cheerio
         this.pretty = pretty
-        // todo
-        // !set all urls VIX-CEUNES-ALEGRE
-        this.vixUrl = "https://ru.ufes.br/cardapio/2022-03-25" //? static url
+        this.vixUrl = "https://ru.ufes.br/cardapio" 
+        this.weekdays = ["Sunday", "Monday", "Tuesday", "Weednesday", "Thursday", "Friday", "Saturday"]
     }
 
     async getCardapio()
     {
         try {
-            const result = await axios(this.vixUrl, { method: 'GET' })
-            const $ = cheerio.load(result.data)
-            const data = $('.field-content').text()
-            return data
+            const today = new Date();
+            if (this.weekdays[today.getDay()] === ("Sunday" || "Saturday")) {
+                console.log("fetching -> " + this.vixUrl + `/${moment(today).format("YYYY-MM-DD")}`+"...")
 
+                const result = await axios(this.vixUrl + `/${moment(today).format("YYYY-MM-DD")}`, { method: 'GET' })
+                const $ = cheerio.load(result.data)
+                const data = $('.field-content').text()
+                return data
+            }
+            console.log("Weekend days!")
         } catch (error) {
             console.log(error)
         }
     }
 
-    
+
 
 }
 

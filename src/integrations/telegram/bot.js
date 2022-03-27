@@ -39,7 +39,7 @@ class Bot
             const regexGuarnição = "/Guarnição/ig"
 
             if (!_.isEmpty(cardapio)) {
-
+                console.log("Success on fetching!\n")
                 cardapio = cardapio.replace(regexJantar, "\n---------------------------------------\nJantar")
                 cardapio = cardapio.replace(regexPratoPrincipal, "\nPrato Principal")
                 cardapio = cardapio.replace(regexSalada, "\nSalada")

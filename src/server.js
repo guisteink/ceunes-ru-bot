@@ -5,7 +5,7 @@ const routine = require("./services/cron-job/routine");
 
 app.listen(port, () =>
 {
-    console.log("Server is now running! 🔥");
+    console.log("Server is now running! 🔥\n");
     routine.execute()
 
 });
