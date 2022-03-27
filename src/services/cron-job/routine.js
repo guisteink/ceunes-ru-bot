@@ -9,7 +9,7 @@ class Routine
     {
         this.botgram = botgram;
         this.scrapper = scrapper;
-        this.cycle = "0 10 17 * * *"; 
+        this.cycle = "0 10 16 * * *"; 
         // this.cycle = '* * * *'; 
         this.cronjob = cronjob
     }
