@@ -16,8 +16,8 @@ class Routine
 
     async execute()
     {
-        // cronjob.schedule(this.cycle, async () => await this.botgram.sendMessage());
-        this.botgram.sendMessage()
+        cronjob.schedule(this.cycle, async () => await this.botgram.sendMessage());
+        // this.botgram.sendMessage()
     }
 }
 
