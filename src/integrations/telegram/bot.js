@@ -1,8 +1,9 @@
-const fetch = typeof window !== 'undefined' ? window.fetch : require('node-fetch');
-const scrapper = require('../../integrations/web-scrapper/scrapper')
 const dotenv = require("dotenv")
-dotenv.config()
+const fetch = typeof window !== 'undefined' ? window.fetch : require('node-fetch');
 const _ = require('lodash')
+
+const scrapper = require('../../integrations/web-scrapper/scrapper')
+dotenv.config()
 
 class Bot
 {
@@ -13,8 +14,6 @@ class Bot
         this.baseUrl = `https://api.telegram.org/bot${this.token}`;
         this.scrapper = scrapper
     }
-
-
 
     async getUpdates()
     {
