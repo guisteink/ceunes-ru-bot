@@ -45,6 +45,8 @@ class Bot
             cardapio = cardapio.replace(regexAcompanhamento, "\nAcompanhamento")
             cardapio = cardapio.replace(regexGuarnição, "\nGuarnição")
 
+            // console.log('Fail: ', cardapio)
+
             if (!_.isEmpty(cardapio)) {
                 const result = await fetch(this.baseUrl + "/sendMessage", {
                     method: "POST",
@@ -52,7 +54,8 @@ class Bot
                     headers: { 'Content-Type': 'application/json' }
                 })
 
-                if(result.status === 200) console.log('Successfull message')
+                if (result.status === 200) console.log('Successfull message')
+                else console.log('Fail: ', result)
             }
         } catch (error) {
             console.log(error)
