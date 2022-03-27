@@ -18,7 +18,7 @@ class Scrapper
     {
         try {
             const today = new Date();
-            if (this.weekdays[today.getDay()] === ("Sunday" || "Saturday")) {
+            if (!this.weekdays[today.getDay()] === ("Sunday" || "Saturday")) {
                 console.log("fetching -> " + this.vixUrl + `/${moment(today).format("YYYY-MM-DD")}`+"...")
 
                 const result = await axios(this.vixUrl + `/${moment(today).format("YYYY-MM-DD")}`, { method: 'GET' })
