@@ -9,8 +9,8 @@ class Routine
     {
         this.botgram = botgram;
         this.scrapper = scrapper;
-        // this.cycle = "0 0 14 * * *"; 
-        this.cycle = "0 28 18 * * *"; 
+        this.cycle = "0 30 15 * * *"; 
+        // this.cycle = "0 28 18 * * *"; // 13:28
         this.cronjob = cronjob
     }
 

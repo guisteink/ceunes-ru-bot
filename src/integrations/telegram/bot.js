@@ -38,15 +38,15 @@ class Bot
             const regexAcompanhamento = "/Acompanhamento/ig"
             const regexGuarnição = "/Guarnição/ig"
 
-            if (!_.isEmpty(cardapio)) {
-                console.log("Success on fetching!\n")
-                cardapio = cardapio.replace(regexJantar, "\n---------------------------------------\nJantar")
-                cardapio = cardapio.replace(regexPratoPrincipal, "\nPrato Principal")
-                cardapio = cardapio.replace(regexSalada, "\nSalada")
-                cardapio = cardapio.replace(regexOpcao, "\nOpção")
-                cardapio = cardapio.replace(regexAcompanhamento, "\nAcompanhamento")
-                cardapio = cardapio.replace(regexGuarnição, "\nGuarnição")
+            cardapio = cardapio.replace(regexJantar, "\n---------------------------------------\nJantar")
+            cardapio = cardapio.replace(regexPratoPrincipal, "\nPrato Principal")
+            cardapio = cardapio.replace(regexSalada, "\nSalada")
+            cardapio = cardapio.replace(regexOpcao, "\nOpção")
+            cardapio = cardapio.replace(regexAcompanhamento, "\nAcompanhamento")
+            cardapio = cardapio.replace(regexGuarnição, "\nGuarnição")
 
+            if (!_.isEmpty(cardapio)) {
+                
                 const result = await fetch(this.baseUrl + "/sendMessage", {
                     method: "POST",
                     body: JSON.stringify({ chat_id: this.chat_group_id, text: cardapio, }),
