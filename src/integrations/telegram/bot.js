@@ -47,7 +47,7 @@ class Bot
 
             const result = await fetch(this.baseUrl + "/sendMessage", {
                 method: "POST",
-                body: JSON.stringify({ chat_id: this.chat_group_id, text: 'task every minute test', }),
+                body: JSON.stringify({ chat_id: this.chat_group_id, text: cardapio, }),
                 headers: { 'Content-Type': 'application/json' }
             })
 
