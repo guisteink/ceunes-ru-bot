@@ -9,15 +9,15 @@ class Routine
     {
         this.botgram = botgram;
         this.scrapper = scrapper;
-        this.cycle = '45 13 * * *'; // -> 10:20 AM
-        // this.cycle = "* * * * *"; // all minute
+        // this.cycle = '45 13 * * *'; // -> 10:20 AM
+        this.cycle = "* * * * *"; // all minute
         this.cronjob = cronjob
     }
 
     async execute()
     {
-        cronjob.schedule(this.cycle, async () => await this.botgram.sendMessage());
-        // this.botgram.sendMessage()
+        // cronjob.schedule(this.cycle, async () => await this.botgram.sendMessage());
+        await this.botgram.sendMessage()
     }
 }
 

@@ -30,13 +30,12 @@ class Bot
         try {
             let cardapio = await this.scrapper.getCardapio()
 
-            const regexAlmoco = "/Almoço/ig"
-            const regexJantar = "/Jantar/ig"
-            const regexPratoPrincipal = "/Prato Principal/ig"
-            const regexSalada = "/Salada/ig"
-            const regexOpcao = "/Opção/ig"
-            const regexAcompanhamento = "/Acompanhamento/ig"
-            const regexGuarnição = "/Guarnição/ig"
+            const regexJantar = /Jantar/ig
+            const regexPratoPrincipal = /Prato Principal/ig
+            const regexSalada = /Salada/ig
+            const regexOpcao = /Opção/ig
+            const regexAcompanhamento = /Acompanhamento/ig
+            const regexGuarnição = /Guarnição/ig
 
             cardapio = cardapio.replace(regexJantar, "\n---------------------------------------\nJantar")
             cardapio = cardapio.replace(regexPratoPrincipal, "\nPrato Principal")
@@ -51,8 +50,6 @@ class Bot
                 headers: { 'Content-Type': 'application/json' }
             })
 
-            // if (result.status === 200) console.log('Successfull message')
-            // else console.log('Fail: ', result)
         } catch (error) {
             console.log(error)
         }
