@@ -37,7 +37,7 @@ class Bot
             const regexAcompanhamento = /Acompanhamento/ig
             const regexGuarnição = /Guarnição/ig
 
-            cardapio = cardapio.replace(regexJantar, "\n---------------------------------------\nJantar")
+            cardapio = cardapio.replace(regexJantar, "\n----------------------------------\nJantar")
             cardapio = cardapio.replace(regexPratoPrincipal, "\nPrato Principal")
             cardapio = cardapio.replace(regexSalada, "\nSalada")
             cardapio = cardapio.replace(regexOpcao, "\nOpção")
