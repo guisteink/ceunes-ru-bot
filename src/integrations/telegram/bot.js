@@ -30,6 +30,7 @@ class Bot
         try {
             let cardapio = await this.scrapper.getCardapio()
 
+            const regexAno = /2022/ig
             const regexJantar = /Jantar/ig
             const regexPratoPrincipal = /Prato Principal/ig
             const regexSalada = /Salada/ig
@@ -37,6 +38,7 @@ class Bot
             const regexAcompanhamento = /Acompanhamento/ig
             const regexGuarnição = /Guarnição/ig
 
+            cardapio = cardapio.replace(regexAno,"2022 - ")
             cardapio = cardapio.replace(regexJantar, "\n----------------------------------\nJantar")
             cardapio = cardapio.replace(regexPratoPrincipal, "\nPrato Principal")
             cardapio = cardapio.replace(regexSalada, "\nSalada")
