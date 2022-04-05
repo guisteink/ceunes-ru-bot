@@ -3,3 +3,5 @@ package-lock.json
 yarn.lock
 .env
 yarn-error.log
+ru_ceunes_bot.pem
+bot_ru.pem
