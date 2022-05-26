@@ -9,15 +9,34 @@ class Routine
     {
         this.botgram = botgram;
         this.scrapper = scrapper;
-        this.cycle = '45 13 * * *'; // -> 10:20 AM
-        // this.cycle = "* * * * *"; // all minute
+        // this.cycle = '45 13 * * *'; // -> 10:45 AM
+
+        this.testCycle = "* * * * *"; // all minute
+        // this.lunchCycle = '45 10 * * *'; // ?test -> 7:45 AM (fuso horario adaptado - AWS)
+        this.lunchCycle = '00 11 * * *'; // ?test -> 7:45 AM (fuso horario adaptado - AWS)
+        this.dinnerCycle = '45 16 * * *'; // ?test -> 13:45 AM (fuso horario adaptado - AWS) 
+
         this.cronjob = cronjob
     }
 
     async execute()
     {
-        cronjob.schedule(this.cycle, async () => await this.botgram.sendMessage());
-        // await this.botgram.sendMessage()
+        // cronjob.schedule(this.cycle, async () => await this.botgram.sendMessage());
+
+        // cronjob.schedule(this.lunchCycle, async () => await this.botgram.sendMessage("lunch"));
+        // cronjob.schedule(this.dinnerCycle, async () => await this.botgram.sendMessage("dinner"));
+
+        cronjob.schedule(this.lunchCycle, async () =>
+        {
+            Promise.all([
+                await this.botgram.sendMessage("vix", "lunch", process.env.TELEGRAM_GROUP_TEST), //todo: set to vix group chat
+                await this.botgram.sendMessage("sm", "lunch", process.env.TELEGRAM_GROUP_TEST), //todo: set to sm group chat
+                await this.botgram.sendMessage("alegre", "lunch", process.env.TELEGRAM_GROUP_TEST) //todo: set to alegre group chat
+            ])
+        })
+
+        // await this.botgram.sendMessage("alegre", "lunch")
+        // await this.botgram.sendMessage("dinner")
     }
 }
 

@@ -10,23 +10,38 @@ class Scrapper
         this.axios = axios
         this.cheerio = cheerio
         this.pretty = pretty
-        this.vixUrl = "https://ru.ufes.br/cardapio" 
+        this.vixUrl = "https://ru.ufes.br/cardapio"
+        this.smUrl = "https://restaurante.saomateus.ufes.br/cardapio"
+        this.alegreUrl = "https://restaurante.alegre.ufes.br/cardapio"
         this.weekdays = ["Sunday", "Monday", "Tuesday", "Weednesday", "Thursday", "Friday", "Saturday"]
     }
 
-    async getCardapio()
+    async getCardapio(restaurant, opt)
     {
-        try {
-            const today = new Date();
-            if (this.weekdays[today.getDay()] !== ("Sunday" || "Saturday")) {
-                console.log("fetching -> " + this.vixUrl + `/${moment(today).format("YYYY-MM-DD")}`+"...")
+        const today = new Date();
+        let baseUrl;
 
-                const result = await axios(this.vixUrl + `/${moment(today).format("YYYY-MM-DD")}`, { method: 'GET' })
-                const $ = cheerio.load(result.data)
-                const data = $('.field-content').text()
-                return data
+        if (restaurant == "vix") baseUrl = this.vixUrl;
+        if (restaurant == "sm") baseUrl = this.smUrl;
+        if (restaurant == "alegre") baseUrl = this.alegreUrl;
+
+        try {
+            if (this.weekdays[today.getDay()] !== ("Sunday" || "Saturday")) {
+                console.log("fetching -> " + baseUrl + `/${moment(today).format("YYYY-MM-DD")}` + "...")
+
+                const result = await axios(baseUrl + `/${moment(today).format("YYYY-MM-DD")}`, { method: 'GET' })
+                // const result = await axios(baseUrl + `/2022-05-25`, { method: 'GET' }) //? att to dynamic above
+                const $ = cheerio.load(result.data, null, false)
+                // const data = $('.field-content').text() ! this works too 
+                const data = $('.view-content').children("div")
+                const lunch = $(data[0]).text()
+                const dinner = $(data[1]).text()
+
+                return opt === "lunch" ? lunch : dinner;
             }
+
             else console.log("Weekend days!")
+
         } catch (error) {
             console.log(error)
         }
