@@ -9,14 +9,14 @@ class Routine
     {
         this.botgram = botgram;
         this.scrapper = scrapper;
+        this.lunchCycle = '00 11 * * *'; // ?test -> 8:00 AM (fuso horario adaptado - AWS)
+        // this.dinnerCycle = '45 17 * * *'; // ?test -> 14:45 AM (fuso horario adaptado - AWS) 
         // this.cycle = '45 13 * * *'; // -> 10:45 AM
 
         // this.testCycle = "* * * * *"; // all minute
         // this.lunchCycle = '45 10 * * *'; // ?test -> 7:45 AM (fuso horario adaptado - AWS)
-        this.lunchCycle = '00 11 * * *'; // ?test -> 8:00 AM (fuso horario adaptado - AWS)
-        this.dinnerCycle = '45 17 * * *'; // ?test -> 13:45 AM (fuso horario adaptado - AWS) 
 
-        // this.lunchCycle = '06 14 * * *'; // ?test -> 8:00 AM (fuso horario adaptado - AWS)
+        this.dinnerCycle = '29 14 * * *';
 
         this.cronjob = cronjob
     }
