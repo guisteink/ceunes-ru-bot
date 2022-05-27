@@ -16,7 +16,7 @@ class Routine
         // this.testCycle = "* * * * *"; // all minute
         // this.lunchCycle = '45 10 * * *'; // ?test -> 7:45 AM (fuso horario adaptado - AWS)
 
-        this.dinnerCycle = '29 14 * * *';
+        this.dinnerCycle = '35 14 * * *';
 
         this.cronjob = cronjob
     }
