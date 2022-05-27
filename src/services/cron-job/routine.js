@@ -37,14 +37,14 @@ class Routine
             ])
         })
 
-        cronjob.schedule(this.dinnerCycle, async () =>
-        {
-            Promise.all([
-                await this.botgram.sendMessage("vix", "dinner", process.env.TELEGRAM_GROUP_TEST), //todo: set to vix group chat
-                await this.botgram.sendMessage("sm", "dinner", process.env.TELEGRAM_GROUP_TEST), //todo: set to sm group chat
-                await this.botgram.sendMessage("alegre", "dinner", process.env.TELEGRAM_GROUP_TEST) //todo: set to alegre group chat
-            ])
-        })
+        // cronjob.schedule(this.dinnerCycle, async () =>
+        // {
+        //     Promise.all([
+        //         await this.botgram.sendMessage("vix", "dinner", process.env.TELEGRAM_GROUP_TEST), //todo: set to vix group chat
+        //         await this.botgram.sendMessage("sm", "dinner", process.env.TELEGRAM_GROUP_TEST), //todo: set to sm group chat
+        //         await this.botgram.sendMessage("alegre", "dinner", process.env.TELEGRAM_GROUP_TEST) //todo: set to alegre group chat
+        //     ])
+        // })
 
         // await this.botgram.sendMessage("alegre", "lunch")
         // await this.botgram.sendMessage("dinner")
