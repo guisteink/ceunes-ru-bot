@@ -9,27 +9,14 @@ class Routine
     {
         this.botgram = botgram;
         this.scrapper = scrapper;
-        this.lunchCycle = '00 11 * * *'; // ?test -> 8:00 AM (fuso horario adaptado - AWS)
-        this.dinnerCycle = '45 17 * * *'; // ?test -> 14:45 AM (fuso horario adaptado - AWS) 
-        // this.cycle = '45 13 * * *'; // -> 10:45 AM
-
-        // this.testCycle = "* * * * *"; // all minute
-        // this.lunchCycle = '45 10 * * *'; // ?test -> 7:45 AM (fuso horario adaptado - AWS)
-
-        // this.dinnerCycle = '40 14 * * *';
+        this.lunchCycle = '00 11 * * *'; // ?test -> 8:00 AM (fuso horario adaptado - GMT)
+        this.dinnerCycle = '45 17 * * *'; // ?test -> 14:45 AM (fuso horario adaptado - GMT) 
 
         this.cronjob = cronjob
     }
 
     async execute()
     {
-        //! ALERTA, SE NAO TEM O HORARIO NO SITE E O CRAWLER TENTA BUSCAR, ENVIA UMA MENSAGEM BUGADISSIMA. EVITAR!!!
-        //!COMO? -> TER CERTEZA DOS HORARIOS DE SAIDA DOS CARDAPIOS <-
-        // cronjob.schedule(this.cycle, async () => await this.botgram.sendMessage());
-
-        // cronjob.schedule(this.lunchCycle, async () => await this.botgram.sendMessage("lunch"));
-        // cronjob.schedule(this.dinnerCycle, async () => await this.botgram.sendMessage("dinner"));
-
         cronjob.schedule(this.lunchCycle, async () =>
         {
             Promise.all([
