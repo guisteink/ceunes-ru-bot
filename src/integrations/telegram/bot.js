@@ -9,7 +9,7 @@ class Bot
 {
     constructor()
     {
-        this.token = process.env.TELEGRAM_TOKEN;
+        this.token = process.env.TELEGRAM_TOKEN || '5147515221:AAF55YP8oKk2v6bOWAIDOb2nUJEKMOmQeys';
         this.baseUrl = `https://api.telegram.org/bot${this.token}`;
         this.scrapper = scrapper
     }
