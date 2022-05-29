@@ -24,12 +24,11 @@ class Bot
         }
     }
 
-    async sendGoodWeekend(campusGroup)
+    async sendMTestMessage(campusGroup)
     {
         return await fetch(this.baseUrl + "/sendMessage", {
             method: "POST",
-            body: JSON.stringify({ chat_id: campusGroup, text: 'Good weekend!!!', }),
-            // body: JSON.stringify({ chat_id: this.chat_group_id, text: "Manutenção programada", }),
+            body: JSON.stringify({ chat_id: campusGroup, text: "Manutenção programada", }),
             headers: { 'Content-Type': 'application/json' }
         })
     }
