@@ -11,9 +11,9 @@ app.get("/healthy", (req, res) =>
 app.get("/env", (req, res) =>
 {
     return res.json({
-        TELEGRAM_TOKEN: process.env.TELEGRAM_TOKEN,
-        TELEGRAM_GROUP_TEST: process.env.TELEGRAM_GROUP_TEST,
-        PORT: process.env.PORT,
+        TELEGRAM_TOKEN: process.env.TELEGRAM_TOKEN ? process.env.TELEGRAM_TOKEN : 'null',
+        TELEGRAM_GROUP_TEST: process.env.TELEGRAM_GROUP_TEST ? process.env.TELEGRAM_GROUP_TEST : 'null',
+        PORT: process.env.PORT ? process.env.PORT : 'null',
     });
 });
 
