@@ -5,7 +5,7 @@ const routine = require("./services/cron-job/routine");
 
 app.get("/healthy", (req, res) =>
 {
-    return res.json("Server is up!");
+    return res.json({ result: "Server is up!" });
 });
 
 app.get("/env", (req, res) =>
