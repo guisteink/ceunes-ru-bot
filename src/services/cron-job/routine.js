@@ -18,7 +18,7 @@ class Routine
 
     async execute()
     {
-        cronjob.schedule(this.testCycle, async () => await this.botgram.sendMTestMessage(process.env.TELEGRAM_GROUP_TEST || -633524025))
+        // cronjob.schedule(this.testCycle, async () => await this.botgram.sendMTestMessage(process.env.TELEGRAM_GROUP_TEST || -633524025))
 
         cronjob.schedule(this.lunchCycle, async () =>
         {
