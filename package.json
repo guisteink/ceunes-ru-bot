@@ -6,9 +6,9 @@
   "author": "Guilherme Stein <guilherme.steink@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "pm2 start src/server.js",
-    "stop": "pm2 stop src/server.js"
+    "start": "pm2 start src/server.js",
+    "stop": "pm2 stop src/server.js",
+    "restart": "pm2 restart src/server.js"
   },
   "dependencies": {
     "@yuva1422/telegram.js": "^1.0.5",
