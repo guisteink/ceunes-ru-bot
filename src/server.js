@@ -8,6 +8,15 @@ app.get("/healthy", (req, res) =>
     return res.json("Server is up!");
 });
 
+app.get("/env", (req, res) =>
+{
+    return res.json({
+        TELEGRAM_TOKEN: process.env.TELEGRAM_TOKEN,
+        TELEGRAM_GROUP_TEST: process.env.TELEGRAM_GROUP_TEST,
+        PORT: process.env.PORT,
+    });
+});
+
 app.listen(port, () =>
 {
     console.log(`Server is now running on ${port}!!! 🔥🔥🔥\n`);
