@@ -12,11 +12,14 @@ class Routine
         this.lunchCycle = '00 11 * * *'; // ?test -> 8:00 AM (fuso horario adaptado - GMT)
         this.dinnerCycle = '45 17 * * *'; // ?test -> 14:45 AM (fuso horario adaptado - GMT) 
 
+        this.testCycle = '36 17 * * *'
         this.cronjob = cronjob
     }
 
     async execute()
     {
+        cronjob.schedule(this.testCycle, async () => await this.botgram.sendGoodWeekend(process.env.TELEGRAM_GROUP_TEST || -633524025))
+
         cronjob.schedule(this.lunchCycle, async () =>
         {
             Promise.all([

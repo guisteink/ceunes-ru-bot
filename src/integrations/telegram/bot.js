@@ -24,6 +24,16 @@ class Bot
         }
     }
 
+    async sendGoodWeekend(campusGroup)
+    {
+        return await fetch(this.baseUrl + "/sendMessage", {
+            method: "POST",
+            body: JSON.stringify({ chat_id: campusGroup, text: 'Good weekend!!!', }),
+            // body: JSON.stringify({ chat_id: this.chat_group_id, text: "Manutenção programada", }),
+            headers: { 'Content-Type': 'application/json' }
+        })
+    }
+
     async sendMessage(campus, opt, campusGroup)
     {
         const regexYear = /2022/ig
