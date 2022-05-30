@@ -10,7 +10,7 @@ class Routine
         this.botgram = botgram;
         this.scrapper = scrapper;
         this.lunchCycle = '45 13 * * *'; // ?test -> 10:45 AM (fuso horario adaptado - GMT)
-        this.dinnerCycle = '45 17 * * *'; // ?test -> 14:45 AM (fuso horario adaptado - GMT) 
+        this.dinnerCycle = '45 18 * * *'; // ?test -> 15:45 AM (fuso horario adaptado - GMT) 
 
         this.testCycle = '36 17 * * *'
         this.cronjob = cronjob
