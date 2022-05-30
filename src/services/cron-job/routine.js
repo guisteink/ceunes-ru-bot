@@ -9,7 +9,7 @@ class Routine
     {
         this.botgram = botgram;
         this.scrapper = scrapper;
-        this.lunchCycle = '00 11 * * *'; // ?test -> 8:00 AM (fuso horario adaptado - GMT)
+        this.lunchCycle = '30 12 * * *'; // ?test -> 9:30 AM (fuso horario adaptado - GMT)
         this.dinnerCycle = '45 17 * * *'; // ?test -> 14:45 AM (fuso horario adaptado - GMT) 
 
         this.testCycle = '36 17 * * *'
@@ -18,7 +18,7 @@ class Routine
 
     async execute()
     {
-        // cronjob.schedule(this.testCycle, async () => await this.botgram.sendMTestMessage(process.env.TELEGRAM_GROUP_TEST || -633524025))
+        // cronjob.schedule(this.testCycle, async () => await this.botgram.sendTestMessage(process.env.TELEGRAM_GROUP_TEST || -633524025))
 
         cronjob.schedule(this.lunchCycle, async () =>
         {

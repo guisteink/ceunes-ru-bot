@@ -24,7 +24,7 @@ class Bot
         }
     }
 
-    async sendMTestMessage(campusGroup)
+    async sendTestMessage(campusGroup)
     {
         return await fetch(this.baseUrl + "/sendMessage", {
             method: "POST",
