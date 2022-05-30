@@ -6,6 +6,7 @@
   "author": "Guilherme Stein <guilherme.steink@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "dev": "node src/server.js",
     "start": "pm2 start src/server.js",
     "stop": "pm2 stop src/server.js",
     "restart": "pm2 restart src/server.js"

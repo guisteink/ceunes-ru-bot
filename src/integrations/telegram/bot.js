@@ -35,6 +35,7 @@ class Bot
 
     async sendMessage(campus, opt, campusGroup)
     {
+        let isValidMessage;
         const regexYear = /2022/ig
         const regexPratoPrincipal = /Prato Principal/ig
         const regexSalada = /Salada/ig
@@ -47,7 +48,7 @@ class Bot
         const regexAcompanhamento2 = /Acompanhamento 2/ig
         const regexSobremesa = /Sobremesa/ig
         const regexGoiabeirasEMaruipe = /Goiabeiras e Maruípe/ig
-        const regexVixAlmoco = /Almoço/ig
+        const regexVixAlmoco = /Almoço/ig //check if isValid message before send
         const regexSMAlmoco = /ALMOÇO/ig
         const regexSMjantar = /Jantar/ig
         const regexSMvix = /ALMOÇO/ig
@@ -89,12 +90,24 @@ class Bot
                         lunch = lunch.replace("*", "\n*")
                     }
 
-                    return await fetch(this.baseUrl + "/sendMessage", {
-                        method: "POST",
-                        body: JSON.stringify({ chat_id: campusGroup, text: lunch, }),
-                        // body: JSON.stringify({ chat_id: this.chat_group_id, text: "Manutenção programada", }),
-                        headers: { 'Content-Type': 'application/json' }
-                    })
+                    isValidMessage = lunch.match("Almoço" || "ALMOÇO" || "ALMOCO" || "Almoco")
+
+                    return isValidMessage != null ?
+                        await fetch(this.baseUrl + "/sendMessage", {
+                            method: "POST",
+                            body: JSON.stringify({ chat_id: campusGroup, text: lunch, }),
+                            // body: JSON.stringify({ chat_id: this.chat_group_id, text: "Manutenção programada", }),
+                            headers: { 'Content-Type': 'application/json' }
+                        })
+                        :
+                        null;
+
+                // return await fetch(this.baseUrl + "/sendMessage", {
+                //     method: "POST",
+                //     body: JSON.stringify({ chat_id: campusGroup, text: lunch, }),
+                //     // body: JSON.stringify({ chat_id: this.chat_group_id, text: "Manutenção programada", }),
+                //     headers: { 'Content-Type': 'application/json' }
+                // })
 
                 case "dinner":
                     let dinner = await this.scrapper.getCardapio(campus, "dinner")
@@ -131,12 +144,17 @@ class Bot
                         dinner = dinner.replace("*", "\n*")
                     }
 
-                    return await fetch(this.baseUrl + "/sendMessage", {
-                        method: "POST",
-                        body: JSON.stringify({ chat_id: campusGroup, text: dinner, }),
-                        // body: JSON.stringify({ chat_id: this.chat_group_id, text: "Manutenção programada", }),
-                        headers: { 'Content-Type': 'application/json' }
-                    })
+                    isValidMessage = dinner.match("Jantar" || "JANTAR")
+
+                    return isValidMessage != null ?
+                        await fetch(this.baseUrl + "/sendMessage", {
+                            method: "POST",
+                            body: JSON.stringify({ chat_id: campusGroup, text: dinner, }),
+                            // body: JSON.stringify({ chat_id: this.chat_group_id, text: "Manutenção programada", }),
+                            headers: { 'Content-Type': 'application/json' }
+                        })
+                        :
+                        null;
             }
 
 
