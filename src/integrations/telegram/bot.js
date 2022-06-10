@@ -9,8 +9,7 @@ class Bot
 {
     constructor()
     {
-        this.token = process.env.TELEGRAM_TOKEN;
-        this.chat_group_id = process.env.TELEGRAM_GROUP;
+        this.token = process.env.TELEGRAM_TOKEN || '5147515221:AAF55YP8oKk2v6bOWAIDOb2nUJEKMOmQeys';
         this.baseUrl = `https://api.telegram.org/bot${this.token}`;
         this.scrapper = scrapper
     }
@@ -25,32 +24,139 @@ class Bot
         }
     }
 
-    async sendMessage()
+    async sendTestMessage(campusGroup)
     {
+        return await fetch(this.baseUrl + "/sendMessage", {
+            method: "POST",
+            body: JSON.stringify({ chat_id: campusGroup, text: "Manutenção programada", }),
+            headers: { 'Content-Type': 'application/json' }
+        })
+    }
+
+    async sendMessage(campus, opt, campusGroup)
+    {
+        let isValidMessage;
+        const regexYear = /2022/ig
+        const regexPratoPrincipal = /Prato Principal/ig
+        const regexSalada = /Salada/ig
+        const regexSaladas = /Saladas/ig
+        const regexOpcao = /Opção/ig
+        const regexAcompanhamento = /Acompanhamento/ig
+        const regexGuarnição = /Guarnição/ig
+        const regexEntrada = /Entrada/ig
+        const regexAcompanhamento1 = /Acompanhamento 1/ig
+        const regexAcompanhamento2 = /Acompanhamento 2/ig
+        const regexSobremesa = /Sobremesa/ig
+        const regexGoiabeirasEMaruipe = /Goiabeiras e Maruípe/ig
+        const regexVixAlmoco = /Almoço/ig //check if isValid message before send
+        const regexSMAlmoco = /ALMOÇO/ig
+        const regexSMjantar = /Jantar/ig
+        const regexSMvix = /ALMOÇO/ig
+
+
         try {
-            let cardapio = await this.scrapper.getCardapio()
+            switch (opt) {
+                case "lunch":
+                    let lunch = await this.scrapper.getCardapio(campus, "lunch")
 
-            const regexAno = /2022/ig
-            const regexJantar = /Jantar/ig
-            const regexPratoPrincipal = /Prato Principal/ig
-            const regexSalada = /Salada/ig
-            const regexOpcao = /Opção/ig
-            const regexAcompanhamento = /Acompanhamento/ig
-            const regexGuarnição = /Guarnição/ig
+                    if (campus === "vix") {
+                        lunch = lunch.replace(regexGoiabeirasEMaruipe, "")
+                        lunch = lunch.replace(regexVixAlmoco, "Almoço (Goiabeiras e Maruípe)")
+                        lunch = lunch.replace(regexPratoPrincipal, "\n[Prato Principal]")
+                        lunch = lunch.replace(regexSalada, "[Salada]")
+                        lunch = lunch.replace(regexOpcao, "\n[Opção]")
+                        lunch = lunch.replace(regexAcompanhamento, "\n[Acompanhamento]")
+                        lunch = lunch.replace(regexGuarnição, "\n[Guarnição]")
+                        lunch = lunch.replace(regexSobremesa, "\n[Sobremesa]")
+                        lunch = lunch.replace("*", "\n*")
+                    }
 
-            cardapio = cardapio.replace(regexAno,"2022 - ")
-            cardapio = cardapio.replace(regexJantar, "\n----------------------------------\nJantar")
-            cardapio = cardapio.replace(regexPratoPrincipal, "\nPrato Principal")
-            cardapio = cardapio.replace(regexSalada, "\nSalada")
-            cardapio = cardapio.replace(regexOpcao, "\nOpção")
-            cardapio = cardapio.replace(regexAcompanhamento, "\nAcompanhamento")
-            cardapio = cardapio.replace(regexGuarnição, "\nGuarnição")
+                    if (campus === "sm") {
+                        lunch = lunch.replace(regexSMAlmoco, "Almoço (São mateus)")
+                        lunch = lunch.replace(regexAcompanhamento1, "\n[Acompanhamento 1]")
+                        lunch = lunch.replace(regexAcompanhamento2, "\n[Acompanhamento 2]")
+                        lunch = lunch.replace(regexPratoPrincipal, "\n[Prato Principal]")
+                        lunch = lunch.replace(regexGuarnição, "\n[Guarnição]")
+                        lunch = lunch.replace(regexSaladas, "\n[Saladas]")
+                        lunch = lunch.replace(regexSobremesa, "\n[Sobremesa]")
+                    }
 
-            return await fetch(this.baseUrl + "/sendMessage", {
-                method: "POST",
-                body: JSON.stringify({ chat_id: this.chat_group_id, text: cardapio, }),
-                headers: { 'Content-Type': 'application/json' }
-            })
+                    if (campus === "alegre") {
+                        lunch = lunch.replace(regexEntrada, "\n[Entrada]")
+                        lunch = lunch.replace(regexOpcao, "\n[Opção]")
+                        lunch = lunch.replace(regexAcompanhamento, "\n[Acompanhamento]")
+                        lunch = lunch.replace(regexGuarnição, "\n[Guarnição]")
+                        lunch = lunch.replace(regexSobremesa, "\n[Sobremesa]")
+                        lunch = lunch.replace("*", "\n*")
+                    }
+
+                    isValidMessage = lunch.match("Almoço" || "ALMOÇO" || "ALMOCO" || "Almoco")
+
+                    return isValidMessage != null ?
+                        await fetch(this.baseUrl + "/sendMessage", {
+                            method: "POST",
+                            body: JSON.stringify({ chat_id: campusGroup, text: lunch, }),
+                            // body: JSON.stringify({ chat_id: this.chat_group_id, text: "Manutenção programada", }),
+                            headers: { 'Content-Type': 'application/json' }
+                        })
+                        :
+                        null;
+
+                // return await fetch(this.baseUrl + "/sendMessage", {
+                //     method: "POST",
+                //     body: JSON.stringify({ chat_id: campusGroup, text: lunch, }),
+                //     // body: JSON.stringify({ chat_id: this.chat_group_id, text: "Manutenção programada", }),
+                //     headers: { 'Content-Type': 'application/json' }
+                // })
+
+                case "dinner":
+                    let dinner = await this.scrapper.getCardapio(campus, "dinner")
+
+                    if (campus === "vix") {
+                        dinner = dinner.replace(/Goiabeiras/ig, "")
+                        dinner = dinner.replace(/Jantar/ig, "Jantar (Goiabeiras e Maruípe)")
+                        dinner = dinner.replace(regexPratoPrincipal, "\n[Prato Principal]")
+                        dinner = dinner.replace(regexSalada, "[Salada]")
+                        dinner = dinner.replace(regexOpcao, "\n[Opção]")
+                        dinner = dinner.replace(regexAcompanhamento, "\n[Acompanhamento]")
+                        dinner = dinner.replace(regexGuarnição, "\n[Guarnição]")
+                        dinner = dinner.replace(regexSobremesa, "\n[Sobremesa]")
+                        dinner = dinner.replace("*", "\n*")
+                    }
+
+                    if (campus === "sm") {
+                        dinner = dinner.replace(regexSMjantar, "Jantar (São mateus)")
+                        dinner = dinner.replace(regexAcompanhamento1, "\n[Acompanhamento 1]")
+                        dinner = dinner.replace(regexAcompanhamento2, "\n[Acompanhamento 2]")
+                        dinner = dinner.replace(regexPratoPrincipal, "\n[Prato Principal]")
+                        dinner = dinner.replace(regexGuarnição, "\n[Guarnição]")
+                        dinner = dinner.replace(regexSaladas, "\n[Saladas]")
+                        dinner = dinner.replace(regexSobremesa, "\n[Sobremesa]")
+                    }
+
+                    if (campus === "alegre") {
+                        dinner = dinner.replace(/Almoço/ig, "Jantar")
+                        dinner = dinner.replace(regexEntrada, "\n[Entrada]")
+                        dinner = dinner.replace(regexOpcao, "\n[Opção]")
+                        dinner = dinner.replace(regexAcompanhamento, "\n[Acompanhamento]")
+                        dinner = dinner.replace(regexGuarnição, "\n[Guarnição]")
+                        dinner = dinner.replace(regexSobremesa, "\n[Sobremesa]")
+                        dinner = dinner.replace("*", "\n*")
+                    }
+
+                    isValidMessage = dinner.match("Jantar" || "JANTAR")
+
+                    return isValidMessage != null ?
+                        await fetch(this.baseUrl + "/sendMessage", {
+                            method: "POST",
+                            body: JSON.stringify({ chat_id: campusGroup, text: dinner, }),
+                            // body: JSON.stringify({ chat_id: this.chat_group_id, text: "Manutenção programada", }),
+                            headers: { 'Content-Type': 'application/json' }
+                        })
+                        :
+                        null;
+            }
+
 
         } catch (error) {
             console.log(error)

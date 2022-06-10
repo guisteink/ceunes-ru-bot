@@ -8,7 +8,7 @@ app.use((error, req, res, next) =>
 
 app.get("/", (req, res) =>
 {
-    res.json("Bot running!");
+    return res.json({ result: "Bot running!" });
 });
 
 module.exports = app;
