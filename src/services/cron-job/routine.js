@@ -23,24 +23,18 @@ class Routine
         cronjob.schedule(this.lunchCycle, async () =>
         {
             Promise.all([
-                await this.botgram.sendMessage("vix", "lunch", process.env.TELEGRAM_GROUP_TEST || -633524025),
-                // await this.botgram.sendMessage("vix", "lunch", process.env.TELEGRAM_GROUP_TEST || -1001745544259),
-                await this.botgram.sendMessage("sm", "lunch", process.env.TELEGRAM_GROUP_TEST || -633524025),
-                // await this.botgram.sendMessage("sm", "lunch", process.env.TELEGRAM_GROUP_TEST || -1001745544259),
-                await this.botgram.sendMessage("alegre", "lunch", process.env.TELEGRAM_GROUP_TEST || -633524025)
-                // await this.botgram.sendMessage("alegre", "lunch", process.env.TELEGRAM_GROUP_TEST || -1001745544259)
+                await this.botgram.sendMessage("vix", "lunch"),
+                await this.botgram.sendMessage("sm", "lunch"),
+                await this.botgram.sendMessage("alegre", "lunch")
             ])
         })
 
         cronjob.schedule(this.dinnerCycle, async () =>
         {
             Promise.all([
-                // await this.botgram.sendMessage("vix", "dinner", process.env.TELEGRAM_GROUP_TEST || -1001745544259),
-                await this.botgram.sendMessage("vix", "dinner", process.env.TELEGRAM_GROUP_TEST || -633524025),
-                // await this.botgram.sendMessage("sm", "dinner", process.env.TELEGRAM_GROUP_TEST || -1001745544259),
-                await this.botgram.sendMessage("sm", "dinner", process.env.TELEGRAM_GROUP_TEST || -633524025),
-                // await this.botgram.sendMessage("alegre", "dinner", process.env.TELEGRAM_GROUP_TEST || -1001745544259)
-                await this.botgram.sendMessage("alegre", "dinner", process.env.TELEGRAM_GROUP_TEST || -633524025)
+                await this.botgram.sendMessage("vix", "dinner"),
+                await this.botgram.sendMessage("sm", "dinner"),
+                await this.botgram.sendMessage("alegre", "dinner")
             ])
         })
 

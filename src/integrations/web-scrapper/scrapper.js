@@ -16,10 +16,12 @@ class Scrapper
         this.weekdays = ["Sunday", "Monday", "Tuesday", "Weednesday", "Thursday", "Friday", "Saturday"]
     }
 
-    async getCardapio(restaurant, opt)
+    async getCardapio(restaurant, opt, when)
     {
-        const today = new Date();
-        let baseUrl;
+        //? "when" padrão US, 08-07-2022 = 7, august 2022
+        let today, baseUrl;
+        if (when && when != 'today') today = new Date(when)
+        else today = new Date();
 
         if (restaurant == "vix") baseUrl = this.vixUrl;
         if (restaurant == "sm") baseUrl = this.smUrl;
@@ -30,9 +32,8 @@ class Scrapper
                 console.log("fetching -> " + baseUrl + `/${moment(today).format("YYYY-MM-DD")}` + "...")
 
                 const result = await axios(baseUrl + `/${moment(today).format("YYYY-MM-DD")}`, { method: 'GET' })
-                // const result = await axios(baseUrl + `/2022-05-25`, { method: 'GET' }) //? att to dynamic above
                 const $ = cheerio.load(result.data, null, false)
-                // const data = $('.field-content').text() ! this works too 
+                // const data = $('.field-content').text() //! this works too
                 const data = $('.view-content').children("div")
                 const lunch = $(data[0]).text()
                 const dinner = $(data[1]).text()
@@ -46,9 +47,6 @@ class Scrapper
             console.log(error)
         }
     }
-
-
-
 }
 
 module.exports = new Scrapper();

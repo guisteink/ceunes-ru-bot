@@ -12,6 +12,8 @@ class Bot
         this.token = process.env.TELEGRAM_TOKEN || '5147515221:AAF55YP8oKk2v6bOWAIDOb2nUJEKMOmQeys';
         this.baseUrl = `https://api.telegram.org/bot${this.token}`;
         this.scrapper = scrapper
+        this.campusGroupToken = process.env.TELEGRAM_GROUP_TEST || -633524025 // !GRUPO DE TESTES
+        // this.campusGroupToken = process.env.TELEGRAM_GROUP_TEST || -1001745544259 // !GRUPO OFICIAL
     }
 
     async getUpdates()
@@ -33,10 +35,15 @@ class Bot
         })
     }
 
-    async sendMessage(campus, opt, campusGroup)
+    /**
+     *
+     * @param {*} campus "sm, vix ou alegre"
+     * @param {*} opt "almoco ou janta"
+     * @returns
+     */
+    async sendMessage(campus, opt)
     {
         let isValidMessage;
-        const regexYear = /2022/ig
         const regexPratoPrincipal = /Prato Principal/ig
         const regexSalada = /Salada/ig
         const regexSaladas = /Saladas/ig
@@ -51,8 +58,6 @@ class Bot
         const regexVixAlmoco = /Almoço/ig //check if isValid message before send
         const regexSMAlmoco = /ALMOÇO/ig
         const regexSMjantar = /Jantar/ig
-        const regexSMvix = /ALMOÇO/ig
-
 
         try {
             switch (opt) {
@@ -149,7 +154,7 @@ class Bot
                     return isValidMessage != null ?
                         await fetch(this.baseUrl + "/sendMessage", {
                             method: "POST",
-                            body: JSON.stringify({ chat_id: campusGroup, text: dinner, }),
+                            body: JSON.stringify({ chat_id: this.campusGroup, text: dinner, }),
                             // body: JSON.stringify({ chat_id: this.chat_group_id, text: "Manutenção programada", }),
                             headers: { 'Content-Type': 'application/json' }
                         })
