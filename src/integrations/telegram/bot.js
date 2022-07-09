@@ -97,6 +97,9 @@ class Bot
 
                     isValidMessage = lunch.match("Almoço" || "ALMOÇO" || "ALMOCO" || "Almoco")
 
+                    // ! manage data for database here {lunch || dinner};
+                    // ! use this.repository.create(data)
+
                     return isValidMessage != null ?
                         await fetch(this.baseUrl + "/sendMessage", {
                             method: "POST",
@@ -150,6 +153,9 @@ class Bot
                     }
 
                     isValidMessage = dinner.match("Jantar" || "JANTAR")
+
+                    // ! manage data for database here {lunch || dinner};
+                    // ! use this.repository.create(data)
 
                     return isValidMessage != null ?
                         await fetch(this.baseUrl + "/sendMessage", {

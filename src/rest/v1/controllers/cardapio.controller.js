@@ -1,11 +1,27 @@
 const scrapper = require('../../../integrations/web-scrapper/scrapper');
+const repository  = require('../repository/cardapio.repository');
 const _ = require('lodash')
 
-// todo: uso da camada do banco fazendo os gets & saves;
 class CardapioController{
     constructor(){
         this.scrapper = scrapper;
+        this.repository = repository;
     }
+
+    async getAllDataFromDB(req, res){
+        try {
+            // todo: add pagination, limit
+            const { query } = req.query ?? {};
+            const list = await this.repository.getAll(query);
+            return res.json({data: list})
+        } catch (error) {
+            console.log(error)
+            return res.json(error)
+        }
+    }
+
+    //todo
+    async getLastDoc(req, res){}
 
     async getDayMenu(req, res){
         const { campus, option, when } = req.query ?? {};
