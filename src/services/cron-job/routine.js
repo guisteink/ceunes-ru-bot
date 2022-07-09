@@ -10,7 +10,7 @@ class Routine
         this.botgram = botgram;
         this.scrapper = scrapper;
         this.lunchCycle = '45 13 * * *'; // ?test -> 10:45 AM (fuso horario adaptado - GMT)
-        this.dinnerCycle = '45 18 * * *'; // ?test -> 15:45 AM (fuso horario adaptado - GMT) 
+        this.dinnerCycle = '45 18 * * *'; // ?test -> 15:45 AM (fuso horario adaptado - GMT)
 
         this.testCycle = '36 17 * * *'
         this.cronjob = cronjob
@@ -23,21 +23,24 @@ class Routine
         cronjob.schedule(this.lunchCycle, async () =>
         {
             Promise.all([
-                // await this.botgram.sendMessage("vix", "lunch", process.env.TELEGRAM_GROUP_TEST || -633524025),
-                await this.botgram.sendMessage("vix", "lunch", process.env.TELEGRAM_GROUP_TEST || -1001745544259),
-                // await this.botgram.sendMessage("sm", "lunch", process.env.TELEGRAM_GROUP_TEST || -633524025),
-                await this.botgram.sendMessage("sm", "lunch", process.env.TELEGRAM_GROUP_TEST || -1001745544259),
-                // await this.botgram.sendMessage("alegre", "lunch", process.env.TELEGRAM_GROUP_TEST || -633524025)
-                await this.botgram.sendMessage("alegre", "lunch", process.env.TELEGRAM_GROUP_TEST || -1001745544259)
+                await this.botgram.sendMessage("vix", "lunch", process.env.TELEGRAM_GROUP_TEST || -633524025),
+                // await this.botgram.sendMessage("vix", "lunch", process.env.TELEGRAM_GROUP_TEST || -1001745544259),
+                await this.botgram.sendMessage("sm", "lunch", process.env.TELEGRAM_GROUP_TEST || -633524025),
+                // await this.botgram.sendMessage("sm", "lunch", process.env.TELEGRAM_GROUP_TEST || -1001745544259),
+                await this.botgram.sendMessage("alegre", "lunch", process.env.TELEGRAM_GROUP_TEST || -633524025)
+                // await this.botgram.sendMessage("alegre", "lunch", process.env.TELEGRAM_GROUP_TEST || -1001745544259)
             ])
         })
 
         cronjob.schedule(this.dinnerCycle, async () =>
         {
             Promise.all([
-                await this.botgram.sendMessage("vix", "dinner", process.env.TELEGRAM_GROUP_TEST || -1001745544259),
-                await this.botgram.sendMessage("sm", "dinner", process.env.TELEGRAM_GROUP_TEST || -1001745544259),
-                await this.botgram.sendMessage("alegre", "dinner", process.env.TELEGRAM_GROUP_TEST || -1001745544259)
+                // await this.botgram.sendMessage("vix", "dinner", process.env.TELEGRAM_GROUP_TEST || -1001745544259),
+                await this.botgram.sendMessage("vix", "dinner", process.env.TELEGRAM_GROUP_TEST || -633524025),
+                // await this.botgram.sendMessage("sm", "dinner", process.env.TELEGRAM_GROUP_TEST || -1001745544259),
+                await this.botgram.sendMessage("sm", "dinner", process.env.TELEGRAM_GROUP_TEST || -633524025),
+                // await this.botgram.sendMessage("alegre", "dinner", process.env.TELEGRAM_GROUP_TEST || -1001745544259)
+                await this.botgram.sendMessage("alegre", "dinner", process.env.TELEGRAM_GROUP_TEST || -633524025)
             ])
         })
 

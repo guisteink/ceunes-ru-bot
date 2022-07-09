@@ -12,8 +12,8 @@ app.get("/env", (req, res) =>
 {
     return res.json({
         TELEGRAM_TOKEN: process.env.TELEGRAM_TOKEN || '5147515221:AAF55YP8oKk2v6bOWAIDOb2nUJEKMOmQeys',
-        // TELEGRAM_GROUP_TEST: process.env.TELEGRAM_GROUP_TEST || '-633524025',-1001745544259
-        TELEGRAM_GROUP_TEST: process.env.TELEGRAM_GROUP_TEST || '-1001745544259',
+        TELEGRAM_GROUP_TEST: process.env.TELEGRAM_GROUP_TEST || '-633524025', //esse é o TOKEN DO GRUPO TESTE
+        // TELEGRAM_GROUP_TEST: process.env.TELEGRAM_GROUP_TEST || '-1001745544259',
         PORT: process.env.PORT || '8080',
     });
 });
@@ -21,5 +21,5 @@ app.get("/env", (req, res) =>
 app.listen(port, () =>
 {
     console.log(`Server is now running on ${port}!!! 🔥🔥🔥\n`);
-    routine.execute()
+    // routine.execute()
 });

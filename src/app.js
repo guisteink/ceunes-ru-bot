@@ -1,5 +1,9 @@
+const { application } = require("express");
 const express = require("express");
 const app = express();
+const routes = require("./rest/v1/routes/index");
+
+app.use(routes);
 
 app.use((error, req, res, next) =>
 {
